@@ -1,0 +1,23 @@
+.channel {
+  width: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.img {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .img {
+    display: block;
+    object-fit: cover;
+    max-width: 120px;
+  }
+
+  .channel {
+    width: 400px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+  }
+}

@@ -1,7 +1,10 @@
-import StationContainer from '../components/StationContainer'
 import React, { useState, useEffect } from 'react'
+import Skeleton from 'react-loading-skeleton'
+import StationContainer from '../components/StationContainer'
+
 const AllStations = () => {
   const [channels, setChannels] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchChannels = async () => {
@@ -11,8 +14,10 @@ const AllStations = () => {
         )
         const data = await response.json()
         setChannels(data.channels)
+        setLoading(false) // Set loading to false after data is fetched
       } catch (error) {
         console.error('Error fetching channels:', error)
+        setLoading(false) // Set loading to false in case of error
       }
     }
 
@@ -21,8 +26,22 @@ const AllStations = () => {
 
   return (
     <div>
-      <StationContainer channels={channels} />
+      {loading ? ( // Render skeleton loaders if data is loading
+        <div>
+          <h1>Loading...</h1>
+          {/* Render skeleton loaders */}
+          {Array.from({ length: 5 }).map((_, index) => (
+            <div key={index}>
+              <Skeleton height={100} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        // Render StationContainer with channels data when data is loaded
+        <StationContainer channels={channels} />
+      )}
     </div>
   )
 }
+
 export default AllStations
