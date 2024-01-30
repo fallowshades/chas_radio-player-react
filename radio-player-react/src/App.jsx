@@ -3,9 +3,9 @@ import { Flex, Text, Button } from '@radix-ui/themes'
 
 function App() {
   return (
-    <body>
+    <div>
       <AllStations />
-    </body>
+    </div>
   )
 }
 
